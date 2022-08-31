@@ -1,0 +1,20 @@
+公式：
+
+const middleware = (store) => (next) => (action) => {}
+
+
+自定义中间件actionLog
+import {Middleware} from "reudx"
+
+
+export const actionLog: Middleware = (store) => (next) => (action) => {
+	console.log("state 当前", store.getState())
+	console.log("fire action", action)
+	next(action)
+	console.log("state 更新", store.getState())
+	
+}
+
+--- store.js
+
+	const store = createStore(rootReducer, applyMiddleware(thunk, actionLog))

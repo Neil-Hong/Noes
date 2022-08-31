@@ -1,0 +1,14 @@
+const curriedAdd = (a) => {
+	return (b) => {return a+b}
+}
+
+const addTen = curriedAdd(10)
+addTen(10) => 20
+
+=> const addTen = (10) => {
+	return (10) => {return a+10}
+}
+
+=> addTen(10) => (10) => {
+	return (10) => {return 10+b}
+}

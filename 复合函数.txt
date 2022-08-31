@@ -1,0 +1,37 @@
+const hello = function (x){
+	return `Hello, ${x}`
+}
+
+const happy = function (x){
+	return `${x} :)`
+}
+
+const compose = function (f,g){
+	return function (x){
+		return f(g(x))
+	}
+}
+
+const happlyHello = compose (hello, happy)
+happlyHello("Neil")  => Hello, Neil :)
+
+=> const compose = function (hello,happy){
+	return function (x){
+		return hello(happy(x))
+	}
+}
+=> const compose = function (hello,happy){
+	return function (Neil){
+		return hello(function (Neil){
+				return `${Neil} :)`
+				})
+	}
+}
+=> const compose = function (hello,happy){
+	return function (Neil){
+		return function (function (Neil){
+				return `${Neil} :)`
+				}){
+			return `Hello, ${x}`
+			}
+}

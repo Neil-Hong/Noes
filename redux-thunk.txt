@@ -1,0 +1,31 @@
+--- store.js
+
+	const store = createStore(rootReducer, applyMiddleware(thunk));
+
+
+--- actions.js
+
+export const giveMeDataActionCreator = ():ThunkAction<void, RootState, undefined, RecommendProductAction> => async (dispatch, getState)=> {
+	dispatch(fetchRecommendProductStartActionCreator());
+	try{
+		const {data} = await axios.get("http://123.56.149.216:8080/api/productCollections");
+		dispatch(fetchRecommendProductSuccessActionCreator(data))
+	}catch(error){
+		dispatch(fetchRecommendProductFailActionCreator(error.message))
+	}	
+}
+
+
+--- component
+
+	const mapDispatchToProps = (dispatch) => {
+		return{
+			giveMeData: ()=>{
+					dispatch(giveMeDataActionCreator())
+				}
+		}
+	}
+
+	componentDidMount(){
+		this.props.giveMeData();
+	}
